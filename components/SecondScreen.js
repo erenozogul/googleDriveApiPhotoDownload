@@ -81,9 +81,6 @@ export default function SecondScreen({ selectedFiles, setSelectedFiles, goToNext
                     </ul>
                     <div className="button-container">
                         <button onClick={handleUpload} className="upload-button">Yükle</button>
-                        <button onClick={() => router.back()} style={{ backgroundColor: 'red', color: 'white' }}>
-                            Geri Dön
-                        </button>
                     </div>
                 </>
             )}
