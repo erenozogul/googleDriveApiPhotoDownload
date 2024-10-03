@@ -3,15 +3,40 @@ const multer = require('multer');
 const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');
-const cors = require('cors');  // CORS modülünü dahil et
+const cors = require('cors');
+const crypto = require('crypto');
+require('dotenv').config(); // .env dosyasını yükleyin
+
+// Şifreli dosyanın yolu
+const encryptedFilePath = path.join(__dirname, 'service-account-file.json.enc'); // .enc uzantısını ekleyin
+
+// Deşifre fonksiyonu
+function decryptFile(encryptedFilePath, password) {
+    const encryptedData = fs.readFileSync(encryptedFilePath);
+
+    const iv = encryptedData.slice(0, 16); // İlk 16 byte IV
+    const encryptedText = encryptedData.slice(16);
+
+    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(password), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+
+    return decrypted.toString();
+}
+
+// Şifreyi .env dosyasından al
+const password = process.env.SERVICE_ACCOUNT_PASSWORD;
+const decryptedJson = decryptFile(encryptedFilePath, password);
+
+// Deşifre edilmiş JSON'u kullan
+const serviceAccount = JSON.parse(decryptedJson);
 
 // Google Drive API ayarları
-const KEYFILEPATH = path.join(__dirname, 'service-account-file.json');  // Service Account JSON dosyasının yolu
 const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
 // Google Drive istemcisi
 const auth = new google.auth.GoogleAuth({
-    keyFile: KEYFILEPATH,
+    credentials: serviceAccount, // Deşifre edilmiş bilgileri kullan
     scopes: SCOPES,
 });
 
@@ -21,18 +46,16 @@ const driveService = google.drive({ version: 'v3', auth });
 const app = express();
 
 // CORS'u etkinleştir
-app.use(cors());  // Tüm kaynaklara izin verir
-// Eğer sadece belirli bir origin'e izin vermek istersen:
-// app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors()); // Tüm kaynaklara izin verir
 
-const upload = multer({ dest: 'uploads/' });  // Dosyaları geçici olarak kaydet
+const upload = multer({ dest: 'uploads/' }); // Dosyaları geçici olarak kaydet
 
 // Google Drive'a dosya yükleme fonksiyonu
 async function uploadFileToDrive(filePath, fileName) {
     try {
         const fileMetadata = {
             name: fileName,
-            parents: ['1cQC2kz4JmyqCrf205iBgQkjbKrkWRcd1'] // Drive dizin ID'si
+            parents: ['1cQC2kz4JmyqCrf205iBgQkjbKrkWRcd1'], // Drive dizin ID'si
         };
         const media = {
             mimeType: 'image/jpeg', // Dosya tipine göre değiştir
@@ -77,7 +100,7 @@ app.post('/upload', upload.array('files', 100), async (req, res) => {
 });
 
 // Sunucuyu dinleme
-const PORT = 8080;
+const PORT = process.env.PORT || 8080; // Port'u çevresel değişkenden al
 app.listen(PORT, () => {
     console.log(`Sunucu çalışıyor: http://localhost:${PORT}`);
 });
