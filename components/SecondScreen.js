@@ -22,7 +22,7 @@ export default function SecondScreen({ selectedFiles, setSelectedFiles, goToNext
 
         try {
             // Sunucu URL'sini kontrol edin
-            const response = await axios.post('http://localhost:8080/upload', formData, {
+            const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
 
