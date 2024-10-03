@@ -48,6 +48,9 @@ const app = express();
 // CORS'u etkinleştir
 app.use(cors()); // Tüm kaynaklara izin verir
 
+// Middleware for parsing multipart/form-data
+app.use(express.json()); // JSON verileri için
+
 const upload = multer({ dest: 'uploads/' }); // Dosyaları geçici olarak kaydet
 
 // Google Drive'a dosya yükleme fonksiyonu
@@ -95,6 +98,7 @@ app.post('/upload', upload.array('files', 100), async (req, res) => {
 
         res.send({ fileIds }); // Tüm dosya ID'lerini döndür
     } catch (error) {
+        console.error('Hata:', error); // Hata logu
         res.status(500).send('Dosya yüklenemedi: ' + error.message);
     }
 });
