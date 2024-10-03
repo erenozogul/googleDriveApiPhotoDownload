@@ -1,0 +1,334 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f4f4f4;
+}
+
+.first-screen,
+.second-screen,
+.third-screen {
+    text-align: center;
+    /* Yazıları ortala */
+    width: 90%;
+    /* Ekranın genişliğini %90 yap */
+    max-width: 400px;
+    /* Ekranın genişliğini kısıtla */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: white;
+    margin: 0 auto;
+    /* Ortala */
+}
+
+button {
+    background-color: green;
+    /* Buton rengi yeşil */
+    color: white;
+    /* Yazı rengi beyaz */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    /* Üstten boşluk */
+    transition: background-color 0.3s;
+    width: 100%;
+    /* Butonu tam genişlikte yap */
+}
+
+button:hover {
+    background-color: darkgreen;
+    /* Hover durumunda daha koyu yeşil */
+}
+
+input[type="file"] {
+    margin-top: 20px;
+    /* Üstten boşluk */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    /* Genişliği %100 yap */
+}
+
+.remove-icon {
+    cursor: pointer;
+    /* İmleçin el şeklinde görünmesi için */
+    color: red;
+    /* Çarpı simgesinin rengi */
+    margin-left: 10px;
+    /* Çarpı simgesi ile dosya adı arasında boşluk */
+    font-size: 18px;
+    /* Çarpı simgesinin boyutu */
+}
+
+.file-preview {
+    display: inline-block;
+    /* Görsel ve video için yan yana görünüm */
+    margin-right: 10px;
+    /* Görsel ile dosya adı arasında boşluk */
+}
+
+.file-thumbnail {
+    width: 50px;
+    /* Görselin genişliği */
+    height: auto;
+    /* Orantılı yükseklik */
+    border-radius: 5px;
+    /* Kenarları yuvarlatmak için */
+}
+
+.uploading-message {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.loading-image {
+    width: 50px;
+    /* Yükleme simgesinin genişliği */
+    height: 50px;
+    /* Yükleme simgesinin yüksekliği */
+    display: block;
+    /* Görselin blok elementi olarak görünmesini sağla */
+    margin: 0 auto;
+    /* Ortala */
+}
+
+.vazgeç-button {
+    background-color: red;
+    color: white;
+}
+
+/* Responsive media query */
+@media (max-width: 600px) {
+
+    .first-screen,
+    .second-screen,
+    .third-screen {
+        padding: 15px;
+        /* Küçük ekranlarda iç boşluğu azalt */
+    }
+
+    .uploading-message {
+        font-size: 16px;
+        /* Mesaj font boyutunu azalt */
+    }
+}
+
+.second-screen ul {
+    list-style-type: none;
+    /* Nokta veya numara kaldır */
+    padding: 0;
+    /* Varsayılan padding'i kaldır */
+    margin: 0;
+    /* Varsayılan margin'i kaldır */
+}
+
+.first-screen {
+    text-align: center;
+    /* Tüm içeriği ortala */
+    background-image: url('../components/acilisEkrani.png');
+    /* Arka plan resmi */
+    background-size: cover;
+    /* Resmi kapsama */
+    background-position: center;
+    /* Resmi ortala */
+    height: 100vh;
+    /* Yüksekliği tam ekran yap */
+    color: white;
+    /* Yazı rengini beyaz yap */
+    display: flex;
+    /* Flexbox kullanarak içerikleri hizala */
+    flex-direction: column;
+    /* Dikey olarak hizala */
+    justify-content: space-between;
+    /* En üst ve en alta yay */
+    align-items: center;
+    /* Yatay olarak ortala */
+    padding: 20px;
+    /* İçerikler için biraz boşluk */
+}
+
+.header-text {
+    position: absolute;
+    /* Üstte sabit kalması için */
+    top: 0;
+    /* Sayfanın üstüne yapış */
+    left: 50%;
+    /* Yatayda ortala */
+    transform: translateX(-50%);
+    /* Gerçekten ortalamak için kullanılır */
+    font-family: 'Cursive', sans-serif;
+    /* Farklı yazı stili */
+    font-size: 2rem;
+    /* Başlık boyutu */
+    color: #f6f5ee;
+    /* Sarı renk */
+    text-shadow: 2px 2px 4px #000;
+    /* Hafif gölge efekti */
+    margin-top: 10px;
+    /* Üstten biraz boşluk */
+}
+
+.footer-content2 {
+    margin-top: auto;
+    padding-bottom: 10px;
+    color: #10bdcc;
+}
+
+.footer-content {
+    margin-top: auto;
+    /* En alta yasla */
+    padding-bottom: 20px;
+    /* Alt kısmına biraz boşluk */
+}
+
+.first-screen h4 {
+    font-size: 1.2rem;
+    /* Alt başlık boyutu */
+}
+
+.first-screen button {
+    margin: 10px;
+    /* Butonlar arasında boşluk */
+    padding: 10px 20px;
+    /* Buton içi boşluk */
+    font-size: 1rem;
+    /* Buton yazı boyutu */
+    border: none;
+    /* Kenar boşluğu yok */
+    border-radius: 5px;
+    /* Köşeleri yuvarla */
+    cursor: pointer;
+    /* Fare imleci buton üzerine geldiğinde el simgesi */
+}
+
+.first-screen button:hover {
+    background-color: #ccc;
+    /* Hover durumunda arka plan rengi */
+}
+
+
+
+.first-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Dikey ortalama */
+    align-items: center;
+    /* Yatay ortalama */
+    height: 100vh;
+    /* Tam ekran yüksekliği */
+    padding: 20px;
+    /* İçerik alanı için boşluk */
+}
+
+.footer-content {
+    margin-top: auto;
+    /* Aşağı itme */
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f4;
+}
+
+
+
+.header-text {
+    position: relative;
+    top: 10px;
+    /* Üstte az bir boşluk bırak */
+    font-family: 'Cursive', sans-serif;
+    font-size: 2.5rem;
+    color: #f6f5ee;
+    text-shadow: 2px 2px 4px #000;
+    margin-bottom: 20px;
+    /* Alt boşluk ile içerikten ayrıştır */
+}
+
+.footer-content {
+    margin-top: auto;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.footer-content2 {
+    font-size: 1rem;
+    color: #24282b;
+    margin-bottom: 15px;
+    /* Altında biraz boşluk bırak */
+}
+
+button {
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: darkgreen;
+}
+
+input[type="file"] {
+    margin-top: 500px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.vazgeç-button {
+    background-color: red;
+    color: white;
+}
+
+.uploading-message {
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.loading-image {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Responsive media query */
+@media (max-width: 600px) {
+    .first-screen {
+        padding: 15px;
+    }
+
+    .footer-content2 {
+        font-size: 1.3rem;
+    }
+
+    .uploading-message {
+        font-size: 16px;
+    }
+}
